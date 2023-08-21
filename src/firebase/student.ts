@@ -1,14 +1,13 @@
 import { doc, getDoc } from "firebase/firestore";
 import db from "./firebaseApp";
 
-type Student = {
+export type Student = {
     studentId: string;
     name: string;
     assignedTa: string;
     email: string;
     // TODO: Change from any to specific data
-    grades: any;
-
+    grades: {[key: string]: number};
 }
 
 export async function getStudentById(studentId: string) {

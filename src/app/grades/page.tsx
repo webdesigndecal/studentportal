@@ -1,5 +1,10 @@
 import GradesTable from "@/components/GradesTable/GradesTable";
+import styles from "./page.module.css";
 
 export default function Grades() {
-  return <GradesTable />;
+  return (
+    <div className={styles.container}>
+      <GradesTable />
+    </div>
+  );
 }

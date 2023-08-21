@@ -20,8 +20,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={roboto.className}>
         <UserProvider>
-          <Header />
-          {children}
+          <div style={{ minHeight: "100vh" }}>
+            <Header />
+            {children}
+          </div>
         </UserProvider>
       </body>
     </html>

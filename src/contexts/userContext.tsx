@@ -1,21 +1,18 @@
 "use client";
 
+import { Student } from "@/firebase/student";
 import { createContext, useContext, useState } from "react";
-
-type User = {
-  studentId: string;
-};
 
 // Default, user is null.
 interface UserContextValue {
-  user: User | null;
-  setUser: React.Dispatch<React.SetStateAction<User | null>>;
+  user: Student | null;
+  setUser: React.Dispatch<React.SetStateAction<Student | null>>;
 }
 
 const UserContext = createContext<UserContextValue | undefined>(undefined);
 
 function UserProvider({ children }: { children: any }) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<Student | null>(null);
   return (
     <UserContext.Provider value={{ user: user, setUser: setUser }}>
       {children}
@@ -28,8 +25,8 @@ function useUserContext() {
   if (userContext === undefined) {
     throw new Error("useUserContext must be inside an onboarding provider");
   }
+  console.log(userContext.user);
   return { user: userContext.user, setUser: userContext.setUser };
 }
 
-export type { User };
 export { UserProvider, useUserContext };
