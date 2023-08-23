@@ -6,28 +6,27 @@ import { getStudentById } from "@/firebase/student";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function Login() {
+export default function SignIn() {
   const [studentId, setStudentId] = useState("");
   const { user, setUser } = useUserContext();
   const router = useRouter();
 
-  if (user) {
-    router.push("/");
-  }
-
-  const handleLogIn = async () => {
+  const handleSignIn = async () => {
     const student = await getStudentById(studentId);
     if (!student) {
       console.log("No student with that id!");
       return;
     }
+    localStorage.setItem("user", JSON.stringify(student));
+    console.log("from local storage:", localStorage.getItem("user"));
     setUser(student);
     router.push("/");
   };
 
   return (
     <div>
-      <h1>Enter your student ID</h1>
+      <h1>Sign In Page</h1>
+      <h2>Enter your student ID</h2>
       <form>
         <input
           type="text"
@@ -38,9 +37,9 @@ export default function Login() {
           }}
         />
         <StyledButton
-          text="Log In"
+          text="Sign in"
           type="button"
-          onClick={() => handleLogIn()}
+          onClick={() => handleSignIn()}
         />
       </form>
     </div>

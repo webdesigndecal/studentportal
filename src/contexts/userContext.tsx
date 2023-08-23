@@ -1,7 +1,8 @@
 "use client";
 
 import { Student } from "@/firebase/student";
-import { createContext, useContext, useState } from "react";
+import { getUser } from "@/server/localStorage";
+import { Context, createContext, useContext, useEffect, useState } from "react";
 
 // Default, user is null.
 interface UserContextValue {
@@ -12,7 +13,10 @@ interface UserContextValue {
 const UserContext = createContext<UserContextValue | undefined>(undefined);
 
 function UserProvider({ children }: { children: any }) {
-  const [user, setUser] = useState<Student | null>(null);
+  const userFromLocalStorage = getUser();
+  const [user, setUser] = useState<Student | null>(userFromLocalStorage);
+  useEffect(() => setUser(user), [user]);
+
   return (
     <UserContext.Provider value={{ user: user, setUser: setUser }}>
       {children}
@@ -25,7 +29,6 @@ function useUserContext() {
   if (userContext === undefined) {
     throw new Error("useUserContext must be inside an onboarding provider");
   }
-  console.log(userContext.user);
   return { user: userContext.user, setUser: userContext.setUser };
 }
 
