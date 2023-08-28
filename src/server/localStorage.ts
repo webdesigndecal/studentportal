@@ -1,11 +1,11 @@
 import { Student } from "@/firebase/student";
 
-function setUser(student: Student) {
+function setLocalStorageUser(student: Student) {
     const studentAsString = JSON.stringify(student);
     return localStorage.setItem("user", studentAsString);
 }
 
-function getUser(): Student | null {
+function getLocalStorageUser(): Student | null {
     const studentAsString = localStorage.getItem("user");
     if (!studentAsString) {
         return null;
@@ -14,4 +14,4 @@ function getUser(): Student | null {
     return student;
 }
 
-export { setUser, getUser };
+export { setLocalStorageUser, getLocalStorageUser };

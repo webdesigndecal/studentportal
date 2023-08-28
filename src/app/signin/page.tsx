@@ -1,10 +1,10 @@
 "use client";
 
 import StyledButton from "@/components/StyledButton/StyledButton";
-import { useUserContext } from "@/contexts/userContext";
+import { useUserContext } from "@/providers/userContext";
 import { getStudentById } from "@/firebase/student";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function SignIn() {
   const [studentId, setStudentId] = useState("");
@@ -22,6 +22,12 @@ export default function SignIn() {
     setUser(student);
     router.push("/");
   };
+
+  useEffect(() => {
+    if (user) {
+      router.push("/");
+    }
+  }, []);
 
   return (
     <div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useUserContext } from "@/contexts/userContext";
+import { useUserContext } from "@/providers/userContext";
 import styles from "./GradesTable.module.css";
 
 type entryProps = {

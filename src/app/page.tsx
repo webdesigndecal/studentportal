@@ -1,9 +1,8 @@
 "use client";
 
-import StyledButton from "@/components/StyledButton/StyledButton";
 import styles from "./page.module.css";
 import StyledLink from "@/components/StyledLink/StyledLink";
-import { useUserContext } from "@/contexts/userContext";
+import { useUserContext } from "@/providers/userContext";
 
 export default function Page() {
   const { user, setUser } = useUserContext();

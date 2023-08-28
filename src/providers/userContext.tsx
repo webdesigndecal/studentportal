@@ -1,7 +1,7 @@
 "use client";
 
 import { Student } from "@/firebase/student";
-import { getUser } from "@/server/localStorage";
+import { getLocalStorageUser } from "@/server/localStorage";
 import { createContext, useContext, useEffect, useState } from "react";
 
 // Default, user is null.
@@ -13,8 +13,11 @@ interface UserContextValue {
 const UserContext = createContext<UserContextValue | undefined>(undefined);
 
 function UserProvider({ children }: { children: any }) {
-  const userFromLocalStorage = getUser();
-  const [user, setUser] = useState<Student | null>(userFromLocalStorage);
+  const [user, setUser] = useState<Student | null>(null);
+  useEffect(() => {
+    const userFromLocalStorage = getLocalStorageUser();
+    setUser(userFromLocalStorage);
+  }, []);
   useEffect(() => setUser(user), [user]);
 
   return (

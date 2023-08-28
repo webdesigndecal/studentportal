@@ -2,7 +2,8 @@ import Header from "@/components/Header/Header";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
-import { UserProvider } from "@/contexts/userContext";
+import { UserProvider } from "@/providers/userContext";
+import { RouteGuard } from "@/providers/routeGuard";
 
 const roboto = Roboto({ subsets: ["latin"], weight: ["400", "700"] });
 
@@ -20,10 +21,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={roboto.className}>
         <UserProvider>
-          <div style={{ minHeight: "100vh" }}>
-            <Header />
-            {children}
-          </div>
+            <div style={{ minHeight: "100vh" }}>
+              <Header />
+              {children}
+            </div>
         </UserProvider>
       </body>
     </html>

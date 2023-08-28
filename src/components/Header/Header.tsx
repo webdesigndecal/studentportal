@@ -5,7 +5,7 @@ import logo from "../../../public/logo.svg";
 import styles from "./Header.module.css";
 import StyledButton from "../StyledButton/StyledButton";
 import Link from "next/link";
-import { useUserContext } from "@/contexts/userContext";
+import { useUserContext } from "@/providers/userContext";
 
 export default function Header() {
   const { user, setUser } = useUserContext();
