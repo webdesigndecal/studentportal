@@ -21,6 +21,14 @@ const TableEntry = (props: entryProps) => {
 
 export default function GradesTable() {
   const { user, setUser } = useUserContext();
+  if (!user) {
+    return (<div>
+    <h1>Grades</h1>
+    <p>There was an error loading your grades. Please try again later.</p>
+  </div>
+  )}
+
+  const data = parseData(user.grades);
   return (
     <div className={styles.mask}>
       <table className={styles.table}>
@@ -32,16 +40,39 @@ export default function GradesTable() {
           </tr>
         </thead>
         <tbody>
-          {Object.keys(user!.grades).map((key) => (
+          {data.slice(0, 19).map((grade, index) => (
             <TableEntry
-              key={key}
-              assignmentName={key}
-              grade={user!.grades[key]}
-              total={user!.grades[key]}
-            />
-          ))}
+              key={index}
+              assignmentName={index % 2 == 0 ? `Lab ${(Math.floor(index / 2)) + 1}`: `Homework ${Math.floor(index / 2) + 1}`}
+              grade={grade}
+              total={index % 2 == 0 ? 1 : 4}
+            />))}
+          {data.slice(19, 21).map((grade, index) => (
+            <TableEntry
+              key={index}
+              assignmentName={index % 2 == 0 ? 'Midterm' : 'Final'}
+              grade={grade}
+              total={index % 2 == 0 ? 24 : 32}
+            />))}
         </tbody>
       </table>
     </div>
   );
+}
+
+function parseData(grades: {[key: string]: number;}): number[] {
+  const data = [
+    grades.lab1, grades.hw1, 
+    grades.lab2, grades.hw2, 
+    grades.lab3, grades.hw3, 
+    grades.lab4, grades.hw4, 
+    grades.lab5, grades.hw5, 
+    grades.lab6, grades.hw6, 
+    grades.lab7, grades.hw7, 
+    grades.lab8, grades.hw8, 
+    grades.lab9, grades.hw9, 
+    grades.lab10, grades.hw10, 
+    grades.midterm, grades.final
+  ];
+  return data;
 }

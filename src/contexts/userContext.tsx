@@ -2,7 +2,7 @@
 
 import { Student } from "@/firebase/student";
 import { getUser } from "@/server/localStorage";
-import { Context, createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 // Default, user is null.
 interface UserContextValue {
